@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head><title>نتیجه تراکنش</title></head>
+<body>
+<h2>نتیجه تراکنش</h2>
+<p id="result"></p>
+
+<script>
+const urlParams = new URLSearchParams(window.location.search);
+const token = urlParams.get('token');
+const status = urlParams.get('status');
+
+const amount = localStorage.getItem(token);
+let message = "";
+
+if (status === "success" && amount !== null) {
+  message = `✅ تراکنش موفق. مبلغ ${amount} تومان به حساب شما اضافه شد.`;
+  // توکن رو حذف نکنیم! تا ببینی می‌تونی دوباره استفاده کنی 😈
+} else if (status === "success" && amount === null) {
+  message = "⚠️ توکن نامعتبر یا قبلاً استفاده شده.";
+} else {
+  message = "❌ تراکنش ناموفق بود.";
+}
+
+document.getElementById('result').innerText = message;
+</script>
+</body>
+</html>
